@@ -7,6 +7,7 @@ export const getAccess = () => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
   };
   const body = JSON.stringify({ email, password });

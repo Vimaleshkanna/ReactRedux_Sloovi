@@ -7,7 +7,7 @@ import Task from "./Task";
 import Top from "./Top";
 import PropTypes from "prop-types";
 import setAuthToken from "../utils/setAuthToken";
-import { clearTask, getAllTask } from "../actions/task";
+import { clearField, clearTask, getAllTask } from "../actions/task";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -18,12 +18,14 @@ const Dashboard = ({
   getAccess,
   auth,
   getAllTask,
+  clearField,
+  task,
   clearTask,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const childToParent = (childData) => {
     setIsClicked(childData);
-    clearTask(taskNumber);
+    clearField();
   };
 
   useEffect(() => {
@@ -50,12 +52,17 @@ Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
   getAllTask: PropTypes.func.isRequired,
   clearTask: PropTypes.func.isRequired,
+  task: PropTypes.shape({}).isRequired,
 };
 const mapStateToProps = (state) => ({
   isUpdate: state.task.isUpdate,
   taskNumber: state.task.taskNumber,
   auth: state.auth,
+  task: state.task.task,
 });
-export default connect(mapStateToProps, { getAccess, getAllTask, clearTask })(
-  Dashboard
-);
+export default connect(mapStateToProps, {
+  getAccess,
+  getAllTask,
+  clearTask,
+  clearField,
+})(Dashboard);

@@ -104,17 +104,33 @@ export const clearTask = (taskNumber) => async (dispatch) => {
   }
 };
 
-export const updateTask = (id) => async (dispatch) => {
+export const updateTask = (id, taskDetails) => async (dispatch) => {
+  const currentDate = new Date();
+  const assigned_user = taskDetails.assigned_user;
+  const task_date = taskDetails.task_date;
+  const task_time = taskDetails.task_time;
+  const time_zone = currentDate.getSeconds();
+  const task_msg = taskDetails.task_msg;
+  const is_completed = 1;
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
+  const body = JSON.stringify({
+    assigned_user,
+    task_date,
+    task_time,
+    is_completed,
+    time_zone,
+    task_msg,
+  });
   try {
     const res = await axios.put(
       `https://stage.api.sloovi.com/task/lead_cb11a91b1bff4c42806b5c8dea51425d/${id}?company_id=${localStorage.getItem(
         "company_id"
       )}`,
+      body,
       config
     );
     console.log(res.data);

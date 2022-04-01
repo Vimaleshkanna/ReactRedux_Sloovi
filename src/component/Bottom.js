@@ -38,26 +38,40 @@ const Bottom = ({
     setId(task.id);
     if (!isUpdate) {
       clearTask(taskNumber);
-    } else {
-      clearField();
     }
+    // else {
+    //   clearField();
+    // }
+    setTaskDetails({
+      ...taskDetails,
+      task_msg: task.task_msg,
+      task_date: task.task_date,
+      task_time: task.task_time,
+      assigned_user: task.assigned_user,
+    });
   }, [isUpdate]);
   const [tN, setTN] = useState(1);
   const onChange = (e) => {
     setTaskDetails({ ...taskDetails, [e.target.name]: e.target.value });
-    if (
-      taskDetails.assigned_user !== "" ||
-      taskDetails.task_msg !== "" ||
-      taskDetails.task_date !== "" ||
-      taskDetails.task_time !== ""
-    ) {
-      setIsEmpty(false);
-    }
   };
   const handleSave = (e) => {
     e.preventDefault();
-    setTN(tN + 1);
-    addTask(taskDetails, tN);
+    if (
+      taskDetails.assigned_user === " " ||
+      taskDetails.task_msg === " " ||
+      taskDetails.task_date === " " ||
+      taskDetails.task_time === " "
+    ) {
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+    }
+    if (!isEmpty) {
+      setTN(tN + 1);
+      addTask(taskDetails, tN);
+    } else {
+      alert("All fields are Mandatory");
+    }
   };
   const handleCancel = (e) => {
     e.preventDefault();
@@ -70,8 +84,15 @@ const Bottom = ({
   };
   const handleEdit = (e) => {
     e.preventDefault();
-    //alert(id);
-    updateTask(id);
+    setTaskDetails({
+      ...taskDetails,
+      task_msg: task.task_msg,
+      task_date: task.task_date,
+      task_time: task.task_time,
+      assigned_user: task.assigned_user,
+    });
+
+    updateTask(id, taskDetails);
   };
   return (
     <div className="bottom">
@@ -84,7 +105,7 @@ const Bottom = ({
                 className="col-sm-12 text"
                 type="text"
                 name="task_msg"
-                value={task.task_msg}
+                value={taskDetails.task_msg}
                 onChange={(e) => onChange(e)}
                 required
               />
@@ -104,7 +125,7 @@ const Bottom = ({
                   type="date"
                   id="example"
                   className="form-control"
-                  value={task.task_date}
+                  value={taskDetails.task_date}
                   onChange={(e) => onChange(e)}
                   required
                 />
@@ -118,7 +139,7 @@ const Bottom = ({
                 className="time"
                 name="task_time"
                 onChange={(e) => onChange(e)}
-                value={task.task_time}
+                value={taskDetails.task_time}
                 required
               />
               <datalist id="times">
@@ -156,7 +177,7 @@ const Bottom = ({
                 className="col-sm-12 text"
                 type="text"
                 name="assigned_user"
-                value={task.assigned_user}
+                value={taskDetails.assigned_user}
                 onChange={(e) => onChange(e)}
                 required
               />
@@ -189,9 +210,7 @@ const Bottom = ({
               {isUpdate ? null : (
                 <button
                   type="submit"
-                  className={`btn btn-success ${
-                    isEmpty ? "d-none" : "d-block"
-                  }`}
+                  className={`btn btn-success`}
                   onClick={handleSave}
                 >
                   Save

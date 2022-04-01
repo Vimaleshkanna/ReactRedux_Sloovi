@@ -18,12 +18,6 @@ const initialState = {
 
 export default function (state = initialState, action) {
   const { type, payload, taskNumber, id } = action;
-  // const task_msg = payload.results.task_msg;
-  // const task_date = payload.results.task_date;
-  // const task_time = payload.results.task_time;
-  // const assigned_user = payload.results.assigned_user;
-
-  // const required_task = { task_msg, task_date, task_time, assigned_user };
   switch (type) {
     case ADD_TASK:
       return {
@@ -61,17 +55,15 @@ export default function (state = initialState, action) {
     case CLEAR_FIELD:
       return {
         ...state,
-        task: {},
-        tasks: [...state.tasks],
-        isUpdate: true,
+        isUpdate: false,
         taskNumber: state.tasks.length,
       };
     case UPDATE_TASK:
       return {
         ...state,
-        task: payload,
+        task: payload.results,
         tasks: state.tasks.map((task) =>
-          task.id === id ? { ...task, task: payload } : task
+          task.id === payload.results.id ? payload.results : task
         ),
         isUpdate: !state.isUpdate,
         loading: false,
