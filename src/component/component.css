@@ -1,0 +1,57 @@
+.row {
+  margin-bottom: 10px;
+}
+.dashboard {
+  width: 400px;
+  height: 400px;
+  border: 1px solid grey;
+  border: none;
+
+  margin: 0 auto;
+}
+
+.plus {
+  width: 30px;
+  text-align: center;
+}
+
+.bottom {
+  background-color: #e2fcfc;
+  height: 90%;
+}
+
+.title {
+  padding-top: 7px;
+}
+
+.time {
+  height: 38px;
+  width: 170px;
+  background-color: white;
+}
+
+.button {
+  padding-left: 245px;
+}
+.btn {
+  margin: 2px;
+  width: 110px;
+  padding: 5px;
+}
+
+.but {
+  width: 20px;
+}
+
+@media screen and (max-width: 400px) {
+  .dashboard {
+    width: 310px;
+    height: 535px;
+  }
+  .btn {
+    margin: 2px;
+    width: 92px;
+    padding: -10px;
+    margin-left: -42px;
+  }
+}
