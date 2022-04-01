@@ -1,9 +1,9 @@
 import axios from "axios";
 import { GET_ACCESS } from "./types";
-
+import { EMAIL, PASSWORD } from "../cred/cred";
 export const getAccess = () => async (dispatch) => {
-  const email = "smithwills1989@gmail.com";
-  const password = "12345678";
+  const email = EMAIL;
+  const password = PASSWORD;
   const config = {
     headers: {
       "Content-Type": "application/json",
