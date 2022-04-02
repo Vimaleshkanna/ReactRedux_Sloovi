@@ -30,10 +30,7 @@ const Dashboard = ({
 
   useEffect(() => {
     getAllTask();
-    if (auth.code === 200) {
-      window.localStorage.setItem("token", auth.results.token);
-      window.localStorage.setItem("company_id", auth.results.company_id);
-    }
+    
   }, []);
 
   return (
