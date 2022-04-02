@@ -35,10 +35,7 @@ const Bottom = ({
   //   clearField();
   // }
   useEffect(() => {
-    if (auth.code === 200) {
-      window.localStorage.setItem("token", auth.results.token);
-      window.localStorage.setItem("company_id", auth.results.company_id);
-    }
+    
     setId(task.id);
     if (!isUpdate) {
       clearTask(taskNumber);
