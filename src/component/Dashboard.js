@@ -29,12 +29,6 @@ const Dashboard = ({
   };
 
   useEffect(() => {
-    getAccess();
-    //alert(auth.code);
-    if (auth.code === 200) {
-      localStorage.setItem("token", auth.results.token);
-      localStorage.setItem("company_id", auth.results.company_id);
-    }
     getAllTask();
   }, []);
 
