@@ -56,22 +56,11 @@ const Bottom = ({
   };
   const handleSave = (e) => {
     e.preventDefault();
-    if (
-      taskDetails.assigned_user === " " ||
-      taskDetails.task_msg === " " ||
-      taskDetails.task_date === " " ||
-      taskDetails.task_time === " "
-    ) {
-      setIsEmpty(true);
-    } else {
-      setIsEmpty(false);
-    }
-    if (!isEmpty) {
+   
+      alert("Task Added Successfully");
       setTN(tN + 1);
       addTask(taskDetails, tN);
-    } else {
-      alert("All fields are Mandatory");
-    }
+    
   };
   const handleCancel = (e) => {
     e.preventDefault();
